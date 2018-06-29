@@ -59,12 +59,8 @@ class Usuario
 
 		if(isset($result[0]))
 		{
-			$row = $result[0];
 
-			$this->setIdusuario($row['id_usuario']);
-			$this->setDeslogin($row['deslogin']);
-			$this->setDessenha($row['dessenha']);
-			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+			$this->setData($result[0]);
 		}
 
 	}
@@ -99,12 +95,9 @@ class Usuario
 
 		if(count($result) > 0)
 		{
-			$row = $result[0];
 
-			$this->setIdusuario($row['id_usuario']);
-			$this->setDeslogin($row['deslogin']);
-			$this->setDessenha($row['dessenha']);
-			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+			$this->setData($result[0]);
+
 		} else {
 
 			throw new Exception("Login e/ou senha inválidos");
@@ -112,6 +105,35 @@ class Usuario
 		}
 	}
 
+	// Método que traz o resultado
+	public function setData($data)
+	{
+		$this->setIdusuario($data['id_usuario']);
+		$this->setDeslogin($data['deslogin']);
+		$this->setDessenha($data['dessenha']);
+		$this->setDtcadastro(new DateTime($data['dtcadastro']));
+	}
+
+
+	// Método para adicionar um novo usuário
+	public function insert()
+	{
+		$sql = new Sql();
+
+		$result = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
+			":LOGIN"=>$this->getDeslogin(),
+			":PASSWORD"=>$this->getDessenha()
+		));
+
+		if(count($result) > 0)
+		{
+			
+			$this->setData($result[0]);
+		
+		}
+	}
+	
+	// Retorna o resultado pronto num JSON
 	public function __toString()
 	{
 		return json_encode(array(

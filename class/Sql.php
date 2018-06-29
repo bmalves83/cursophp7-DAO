@@ -16,10 +16,10 @@ class Sql extends PDO
 		define('BD_Sql', ['sqlsrv:Database=bdphp7;', 'server=localhost\SQLEXPRESS;ConnectionPooling=0;', 'bmalves', '21,1983,']);	
 		
 		$this->conn = new PDO(BD_Mysql[0].BD_Mysql[1], BD_Mysql[2], BD_Mysql[3]);
-
 	}
 
-	private function setParams($statement, $parameters = array()){
+	private function setParams($statement, $parameters = array())
+	{
 
 		foreach ($parameters as $key => $value) {
 			
@@ -29,13 +29,15 @@ class Sql extends PDO
 
 	}
 
-	private function setParam($statement, $key, $value){
+	private function setParam($statement, $key, $value)
+	{
 
 		$statement->bindParam($key, $value);
 
 	}
 
-	public function query($rawQuery, $params = array()){
+	public function query($rawQuery, $params = array())
+	{
 		
 		$stmt = $this->conn->prepare($rawQuery);
 
