@@ -25,13 +25,26 @@ require_once("config.php");
 //echo $user;
 
 // Exemplo de inserção com procedure
+//$aluno = new Usuario();
+//$aluno->setDeslogin("BMAlDs19");
+//$aluno->setDessenha("12s3asdf");
+//$aluno->insert();
+//echo $aluno;
+
+// Como agora tem um método construtor para inserir dados no banco funcionará assim
+//$aluno = new Usuario("Jupira", "41589722asd");
+//$aluno->insert();
+// Se quiser retornar ele na tela pode imprimir
+//echo $aluno;
+
+// Dando update dos dados no banco
 $aluno = new Usuario();
-
-$aluno->setDeslogin("BMAlDs19");
-$aluno->setDessenha("12s3asdf");
-
-$aluno->insert();
+// Carregando o ID que será alterado 
+// No caso desse exercício será será feito assim, no caso prático 
+// o ideal é exibir toda a lista na tela e permitir que o usuário faça a alteração do campo e salve por exemplo
+$aluno->loadById(8);
+// Passando os novos dados para o ID selecionado
+$aluno->update("IgorJup", "Ksdv994");
 
 echo $aluno;
-
 ?>
