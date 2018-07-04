@@ -38,13 +38,19 @@ require_once("config.php");
 //echo $aluno;
 
 // Dando update dos dados no banco
-$aluno = new Usuario();
+//$aluno = new Usuario();
 // Carregando o ID que será alterado 
 // No caso desse exercício será será feito assim, no caso prático 
 // o ideal é exibir toda a lista na tela e permitir que o usuário faça a alteração do campo e salve por exemplo
-$aluno->loadById(8);
+//$aluno->loadById(8);
 // Passando os novos dados para o ID selecionado
-$aluno->update("IgorJup", "Ksdv994");
+//$aluno->update("IgorJup", "Ksdv994");
 
-echo $aluno;
+//echo $aluno;
+
+// Usando o método delete
+$user = new Usuario();
+$user->loadById(7);
+$user->delete();
+echo $user;
 ?>
